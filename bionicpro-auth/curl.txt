@@ -1,0 +1,17 @@
+curl -X POST "http://localhost:8080/realms/YOUR_REALM/protocol/openid-connect/token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "code=КОД_ИЗ_CALLBACK" \
+  -d "redirect_uri=http://localhost:3000/auth/callback" \
+  -d "client_id=reports-api" \
+  -d "client_secret=ВАШ_СЕКРЕТ"
+
+
+Руслан:
+Да, тут лучше разделить роли
+
+bionicpro-auth - это отдельный confidential client в кейклоке, он умеет редиректить на логин, принимать колбэк и обменивать code на токены
+
+reports-api - это защищённый ресурс, он либо остаётся bearerOnly, если к нему ходят с access token, либо вообще не работает напрямую с кейклоком, если к нему приходят только с session куки и он проверяет сессию через auth-сервис
+
+Использовать старый reports-frontend для backend не нужно - лучше завести отдельный клиент под auth backend, а bearerOnly в исходном конфиге был нужен для старой схемы, где frontend сам получал token и передавал его в API
