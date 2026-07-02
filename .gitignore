@@ -6,3 +6,4 @@ Task2/db-data
 Task2/dags/__pycache__
 Task4/clickhouse-data
 Task4/crm-postgres-data
+.venv
