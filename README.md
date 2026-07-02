@@ -54,6 +54,12 @@ reports
 
 docker-compose.yaml
 
+ВАЖНО: Поскольку пользовался примерами crm.csv и olap.csv и там есть user_id - для проверки пользователя дополнительно настраивал user attribute map в KeyCloak.
+Например, для prothetic1@example.com добавил user_id атрибут 1.
+Auth сервер запрашивает у Keycloak профиль, отдает report сурвису.
+Репорт сервис проверяет авторизацию и берет у авторизованного пользователя user_id - по этому id строит отчет.
+Сохраненный keycloak-results-export.json не содержит user_id настройки. Надо донастроить в keycloak.  
+
 
 ## Задание 3
 
